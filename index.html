@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <style>
+            .titulo {display: flex; width: 95%; justify-content: center;}
+            .titulo h1 {font-size: 3rem; font-family: -apple-system, BlinkMacSystemFont;}
+
+            .data {display: block; witdh: 8rem; height: 10rem; /* background-color: #657;*/}
+        </style
+        <meta charset="utf-8">
+        <title>PokeAPI</title>
+    </head>
+    <body>
+        <div class="titulo">
+            <h1>PokeAPI</h1>
+        </div>
+    </body>
+    <script>
+        const response = fetch('https://pokeapi.co/api/v2/pokemon-species/6').then(res => res.json()).then(data => {
+            let body = document.getElementsByTagName("body")[0]
+            let table = document.createElement("table")
+            let tableBody = document.createElement("tbody")
+            let {id, name, base_happiness} = data
+            let processContent = [["id", "Nombre", "Felicidad del pokemon"],[id, name, base_happiness]]
+
+            for(let i of processContent){
+                let row = document.createElement("tr")
+                for(let j of i) {
+                    let cell = document.createElement("td")
+                    let content = document.createTextNode(j)
+
+                    cell.appendChild(content)
+                    row.appendChild(cell)
+                }
+                tableBody.appendChild(row)
+            }
+            table.appendChild(tableBody)
+            body.appendChild(table)
+
+            table.setAttribute("border", "2")
+            //const res = data
+            /*for (let i in evolution){
+
+                console.log(evolution[i])
+            }*/
+        })
+        // console.log(response)
+    </script>
+</html>
